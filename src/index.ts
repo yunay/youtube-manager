@@ -11,8 +11,9 @@ const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 768,
     width: 1366,
-    webPreferences : { nodeIntegration: true },
-    resizable: false,
+    webPreferences : { nodeIntegration: true, enableRemoteModule: true },
+    resizable: true,
+    frame:false
   });
 
   // and load the index.html of the app.
@@ -20,6 +21,8 @@ const createWindow = (): void => {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  mainWindow.removeMenu();
 };
 
 // This method will be called when Electron has finished

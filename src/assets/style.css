@@ -1,0 +1,40 @@
+
+.r-0{
+    right: 0;
+}
+
+.search-bar{
+    margin: 50px;
+    width: 900px;
+}
+
+.video-results-col{
+    padding: 5px;
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.video-result-col-title{
+    font-size: 15px;
+}
+
+.video-result-col-image{
+    max-width: 120px;
+    max-height: 90px;
+    object-fit:contain;
+}
+
+#topbar{
+    -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
+#topbar-btns{
+    -webkit-app-region: no-drag
+}
+
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
