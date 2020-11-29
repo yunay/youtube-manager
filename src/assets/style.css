@@ -1,40 +1,111 @@
+/*Common*/
 
-.r-0{
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.r-0 {
     right: 0;
 }
 
-.search-bar{
-    margin: 50px;
-    width: 900px;
+button:focus, button:active, input:focus, input:active {
+    outline: none !important;
+    box-shadow: none;
 }
 
-.video-results-col{
+/*Topbar*/
+
+#topbar {
+    padding: 5px;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
+
+#topbar-btns {
+    -webkit-app-region: no-drag;
+    float: right;
+}
+
+.topbar-btn {
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.topbar-btn:hover {
+    cursor: pointer;
+}
+
+/*Search bar*/
+
+.search-bar {
+    width: 800px;
+    margin: 20px auto;
+}
+
+.search-bar>input, button {
+    padding: 7px;
+    border: 0;
+}
+
+.search-bar>input {
+    box-shadow: 0px 1px 2px 0px grey;
+    width: 686px;
+    font-size: 18px;
+    color: #7b7474;
+    height: 24px;
+}
+
+.search-bar>button {
+    width: 52px;
+    height: 37px;
+    background: 0;
+    box-shadow: 1px 1px 2px 0px grey;
+    transition: ease-in 200ms;
+}
+
+.search-bar>button:hover{
+    background-color: red;
+  
+    cursor: pointer;
+}
+
+#video-results{
+    width: 90%;
+    margin: 10px auto;
+    height: 750px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.video-result{
+    margin: 20px 10px 30px;
+    box-shadow: 0px 1px 4px 1px grey;
+    padding: 1px;
+}
+
+
+
+
+.video-results-col {
     padding: 5px;
     height: 300px;
     overflow: hidden;
     overflow-y: scroll;
 }
 
-.video-result-col-title{
+.video-result-col-title {
     font-size: 15px;
 }
 
-.video-result-col-image{
-    max-width: 120px;
-    max-height: 90px;
-    object-fit:contain;
+.video-result-col-image {
+    max-width: 320px;
+    max-height: 180px;
+    object-fit: contain;
 }
 
-#topbar{
-    -webkit-user-select: none;
-  -webkit-app-region: drag;
+.video-result-card-img, .video-result-card-info {
+    display: inline-block;
 }
-
-#topbar-btns{
-    -webkit-app-region: no-drag
-}
-
-.btn:focus,.btn:active {
-    outline: none !important;
-    box-shadow: none;
- }

@@ -20,12 +20,12 @@ const Topbar: React.FC<TopbarProps> = (props) => {
     }
 
     return (
-        <nav id="topbar" className="navbar navbar-light bg-light">
-            <img src={icon} width={30} height={20} alt="" />
-            <div id="topbar-btns" className="position-absolute r-0">
-                <button className="btn btn-inline" onClick={minimize}>➖</button>
-                <button className="btn btn-inline" onClick={maximize}>⬜</button>
-                <button className="btn btn-inline" onClick={close}>✖</button>
+        <nav id="topbar">
+            <img src={icon} width={30} height={20} alt="no image" />
+            <div id="topbar-btns">
+                <button className="topbar-btn" onClick={minimize}>➖</button>
+                <button className="topbar-btn" onClick={maximize}>⬜</button>
+                <button className="topbar-btn" onClick={close}>✖</button>
             </div>
         </nav>
     )

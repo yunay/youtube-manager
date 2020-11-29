@@ -8,11 +8,9 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
     const [keyword, setKeyword] = useState("");
 
     return (
-        <div className="input-group mb-3">
-            <input type="text" className="form-control" placeholder="search..." aria-label="search" aria-describedby="button-search" onChange={handleSearchStringChange} />
-            <div className="input-group-append">
-                <button className="btn btn-outline-secondary" type="button" id="button-search" onClick={onSearch}>Search 🔎</button>
-            </div>
+        <div className="search-bar">
+            <input type="text" placeholder="search..." onChange={handleSearchStringChange} />
+            <button type="button" id="button-search" onClick={onSearch}>🔎</button>
         </div>
     )
 

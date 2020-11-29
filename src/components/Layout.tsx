@@ -13,12 +13,9 @@ const Layout = () => {
 
   return (<>
     <Topbar />
-    <div className="mx-auto search-bar">
-      <SearchBar onSearch={onSearch} />
-    </div>
+    <SearchBar onSearch={onSearch} />
     <VideoResults results={results} />
-  </>
-  );
+  </>);
 
   function onSearch(keyword: string) {
 
