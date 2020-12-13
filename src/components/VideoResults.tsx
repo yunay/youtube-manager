@@ -6,14 +6,24 @@ import ReactPlayer from 'react-player'
 
 interface VideoResultsProps {
     results: YoutubeResult[];
+    onResultSelected: (result: YoutubeResult) => any
 }
 
 const VideoResults: React.FC<VideoResultsProps> = (props) => {
 
-    if (props.results && props.results.length > 0) {
+    const onResultSelectedCallback = (result: YoutubeResult) => {
+        props.onResultSelected(result)
+    }
 
+    if (props.results && props.results.length > 0) {
         return <div id="video-results">
-            {props.results.map((result, index) => <div className="video-result" key={index}><VideoResult result={result} key={index} /></div>)}
+            {
+                props.results.map((result, index) => {
+                    return <div className="video-result" key={index}>
+                        <VideoResult result={result} key={index} onResultSelected={onResultSelectedCallback} />
+                    </div>
+                })
+            }
         </div>
     }
 

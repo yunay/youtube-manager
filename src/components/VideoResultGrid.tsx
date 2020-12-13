@@ -3,7 +3,6 @@ import { YoutubeResult } from '../models/YoutubeResult'
 import * as ytdl from 'ytdl-core'
 import * as ffmpeg from 'fluent-ffmpeg'
 import * as readline from 'linebyline'
-var pathToFfmpeg = require('ffmpeg-static');
 
 interface VideoResultGridProps {
     result: YoutubeResult;
@@ -15,7 +14,6 @@ const VideoResultGrid: React.FC<VideoResultGridProps> = (props) => {
 
     const downloadMp3 = async () => {
 
-        console.log(pathToFfmpeg);
         let stream = ytdl.default(props.result.id.videoId, { quality: 'highestaudio' });
         let start = Date.now();
 

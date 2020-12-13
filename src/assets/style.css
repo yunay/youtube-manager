@@ -9,9 +9,25 @@ body {
     right: 0;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 button:focus, button:active, input:focus, input:active {
     outline: none !important;
     box-shadow: none;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgb(195 195 210);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d6d6d6;
 }
 
 /*Topbar*/
@@ -20,6 +36,13 @@ button:focus, button:active, input:focus, input:active {
     padding: 5px;
     -webkit-user-select: none;
     -webkit-app-region: drag;
+    box-shadow: 0px 0px 5px grey;
+    height: 30px;
+}
+
+#topbar>img {
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 5px;
 }
 
 #topbar-btns {
@@ -35,7 +58,7 @@ button:focus, button:active, input:focus, input:active {
 }
 
 .topbar-btn:hover {
-    cursor: pointer;
+    background-color: #dedcdc;
 }
 
 /*Search bar*/
@@ -66,46 +89,109 @@ button:focus, button:active, input:focus, input:active {
     transition: ease-in 200ms;
 }
 
-.search-bar>button:hover{
+.search-bar>button:hover {
     background-color: red;
-  
-    cursor: pointer;
 }
 
-#video-results{
-    width: 90%;
+/*video results*/
+
+#video-results {
+    width: 100%;
     margin: 10px auto;
-    height: 750px;
+    height: 550px;
     overflow: hidden;
     overflow-y: scroll;
 }
 
-.video-result{
+.video-result {
     margin: 20px 10px 30px;
     box-shadow: 0px 1px 4px 1px grey;
     padding: 1px;
-}
-
-
-
-
-.video-results-col {
-    padding: 5px;
-    height: 300px;
-    overflow: hidden;
-    overflow-y: scroll;
+    height: 90px;
+    width: 48%;
+    display: inline-block;
 }
 
 .video-result-col-title {
-    font-size: 15px;
+    margin: 0;
+    width: 500px;
+    overflow: hidden;
+    height: 25px;
 }
 
 .video-result-col-image {
-    max-width: 320px;
-    max-height: 180px;
+    max-width: 120px;
+    max-height: 90px;
     object-fit: contain;
+}
+
+.video-result-card-img {
+    width: 120px;
+}
+
+.video-result-card-info {
+    vertical-align: top;
+    width: 300px;
+    padding: 5px 10px;
 }
 
 .video-result-card-img, .video-result-card-info {
     display: inline-block;
+}
+
+.video-results-button {
+    margin: 0 15px 0 0;
+    background: none;
+    box-shadow: 0px 0px 2px 0px grey;
+    font-size: 16px;
+}
+
+.video-results-button:hover {
+    box-shadow: 0px 0px 4px 0px grey;
+}
+
+.video-result-progress-bar {
+    background-color: rgb(88, 226, 88);
+    height: 5px;
+}
+
+/*Audio Player*/
+
+#audio-player {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px 0px 5px grey;
+    height: 70px;
+}
+
+#audio-player-controls {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.audio-player-time{
+    color: gray;
+    font-size: 20px;
+    width: 7%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: text-bottom;
+}
+
+.audio-player-range{
+    width: 86%;
+    margin:0;
+}
+
+#audio-player-title{
+    text-align: center;
+    color: gray;
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+#ytplayer{
+    position: absolute;
+    bottom: 0;
 }
