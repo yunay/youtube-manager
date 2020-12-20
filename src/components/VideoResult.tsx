@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { YoutubeResult } from '../models/YoutubeResult'
 import ytdl from 'ytdl-core'
 import ffmpeg from 'fluent-ffmpeg'
+import play from '../assets/images/play-overlay.png'
+import stop from '../assets/images/stop-overlay.png'
 
 import { remote } from 'electron'
 
@@ -14,6 +16,7 @@ const VideoResult: React.FC<VideoResultProps> = (props) => {
 
     const [downloadingProcess, setDownloadingProcess] = useState(0)
     const [errorOnDownload, setErrorOnDownload] = useState(false)
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false)
 
     const downloadMP3 = () => {
 
@@ -57,17 +60,22 @@ const VideoResult: React.FC<VideoResultProps> = (props) => {
     }
 
     const onResultSelected = () => {
-        props.onResultSelected(props.result)
+
+        props.onResultSelected(isAudioPlaying ? null : props.result) //If audio is turned on, sent null to stop it.
+        setIsAudioPlaying(!isAudioPlaying)
     }
 
     return (
         <>
             <div className="video-result-card">
-                <div className="video-result-card-img" onClick={onResultSelected}>
+                <div className="video-result-card-img" >
                     <img className="video-result-col-image" alt="no image"
                         src={props.result.snippet.thumbnails.default.url}
                         width={props.result.snippet.thumbnails.default.width}
                         height={props.result.snippet.thumbnails.default.height} />
+                    <div className="video-result-img-overlay">
+                        <img src={isAudioPlaying ? stop : play} onClick={onResultSelected} />
+                    </div>
                 </div>
                 <div className="video-result-card-info">
                     <h3 className="video-result-col-title">{props.result.snippet.title}</h3>
