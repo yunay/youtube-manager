@@ -5,9 +5,14 @@ import AudioPlayerControls from './AudioPlayerControls';
 
 interface AudioPlayerProps {
     audioPlayerResult: AudioPlayerResult;
+    onClose:()=>void;
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = (props) => {
+
+    const close = () => {
+        props.onClose();
+    }
 
     if (props.audioPlayerResult) {
 
@@ -21,6 +26,9 @@ const AudioPlayer: React.FC<AudioPlayerProps> = (props) => {
                 </div>
                 <div id="audio-player-controls">
                     <AudioPlayerControls totalTime={moment.duration(props.audioPlayerResult.contentDetails.duration)} />
+                </div>
+                <div id="audio-player-close" onClick={close}>
+                    ❌
                 </div>
             </div>
         )

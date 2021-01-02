@@ -1,6 +1,6 @@
 {
   "name": "youtube-manager",
-  "productName": "youtube-manager",
+  "productName": "Youtube Downloader",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
@@ -9,7 +9,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts ."
+    "deploy": "electron-builder build --win --publish always",
+    "lint": "eslint --ext .ts .",
+    "build-installer": "electron-builder"
   },
   "keywords": [],
   "author": {
@@ -18,6 +20,21 @@
   },
   "license": "MIT",
   "build": {
+    "appId": "youtube-manager",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/assets/images/icon.ico"
+    },
+    "nsis": {
+      "installerIcon": "src/assets/images/icon.ico",
+      "uninstallerIcon": "src/assets/images/icon.ico",
+      "uninstallDisplayName": "Youtube Downloader",
+      "license":"license.txt",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
     "asarUnpack": [
       "node_modules/ffmpeg-static/bin/${os}/${arch}/ffmpeg",
       "node_modules/ffmpeg-static/index.js",
@@ -70,47 +87,54 @@
     }
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.54",
-    "@electron-forge/maker-deb": "^6.0.0-beta.54",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/cli": "6.0.0-beta.54",
+    "@electron-forge/maker-deb": "6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.54",
+    "@electron-forge/maker-zip": "6.0.0-beta.54",
     "@electron-forge/plugin-webpack": "6.0.0-beta.54",
-    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
-    "@types/fs-extra": "^9.0.4",
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
+    "@marshallofsound/webpack-asset-relocator-loader": "0.5.0",
+    "@types/fs-extra": "9.0.4",
+    "@typescript-eslint/eslint-plugin": "4.0.1",
+    "@typescript-eslint/parser": "4.0.1",
     "css-loader": "3.0.0",
     "electron": "10.1.5",
-    "eslint": "^7.6.0",
-    "eslint-plugin-import": "^2.20.0",
-    "file-loader": "^6.2.0",
-    "fork-ts-checker-webpack-plugin": "^5.0.14",
-    "node-loader": "^1.0.1",
+    "electron-builder": "22.9.1",
+    "eslint": "7.6.0",
+    "eslint-plugin-import": "2.20.0",
+    "file-loader": "6.2.0",
+    "fork-ts-checker-webpack-plugin": "5.0.14",
+    "node-loader": "1.0.1",
     "style-loader": "0.23.1",
-    "ts-loader": "^6.2.1",
-    "typescript": "^4.0.2",
-    "ytdl": "^1.3.5",
-    "ytdl-core": "^4.0.5"
+    "ts-loader": "6.2.1",
+    "typescript": "4.0.2",
+    "ytdl": "1.3.5",
+    "ytdl-core": "4.0.5"
   },
   "dependencies": {
-    "@types/ffmpeg": "^1.0.2",
-    "@types/fluent-ffmpeg": "^2.1.16",
-    "@types/react": "^16.9.55",
-    "@types/react-dom": "^16.9.9",
-    "axios": "^0.21.0",
-    "bootstrap": "^4.5.3",
-    "electron-squirrel-startup": "^1.0.0",
+    "@types/ffmpeg": "1.0.2",
+    "@types/fluent-ffmpeg": "2.1.16",
+    "@types/react": "16.9.55",
+    "@types/react-dom": "16.9.9",
+    "axios": "0.21.0",
+    "bootstrap": "4.5.3",
+    "electron-squirrel-startup": "1.0.0",
+    "electron-updater": "^4.3.5",
     "ffmpeg": "0.0.4",
-    "ffmpeg-static": "^4.2.7",
-    "ffmpeg-static-electron": "^2.0.1",
-    "ffprobe-static": "^3.0.0",
-    "fluent-ffmpeg": "^2.1.2",
-    "fs-extra": "^9.0.1",
-    "linebyline": "^1.3.0",
-    "moment": "^2.29.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-player": "^2.7.0"
+    "ffmpeg-static": "4.2.7",
+    "ffmpeg-static-electron": "2.0.1",
+    "ffprobe-static": "3.0.0",
+    "fluent-ffmpeg": "2.1.2",
+    "fs-extra": "9.0.1",
+    "linebyline": "1.3.0",
+    "moment": "2.29.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-player": "2.7.0",
+    "react-toastify": "6.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yunay/youtube-manager.git"
   }
 }

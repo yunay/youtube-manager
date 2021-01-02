@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 import { YoutubeResult } from '../models/YoutubeResult'
 import ytdl from 'ytdl-core'
 import ffmpeg from 'fluent-ffmpeg'
-import play from '../assets/images/play-overlay.png'
-import stop from '../assets/images/stop-overlay.png'
-
 import { remote } from 'electron'
+import { Helpers } from '../common/Helpers'
 
 interface VideoResultProps {
     result: YoutubeResult;
@@ -14,9 +12,8 @@ interface VideoResultProps {
 
 const VideoResult: React.FC<VideoResultProps> = (props) => {
 
-    const [downloadingProcess, setDownloadingProcess] = useState(0)
-    const [errorOnDownload, setErrorOnDownload] = useState(false)
     const [isAudioPlaying, setIsAudioPlaying] = useState(false)
+    const [isOverlayOn, setIsOverlayOn] = useState(false);
 
     const downloadMP3 = () => {
 
@@ -27,20 +24,13 @@ const VideoResult: React.FC<VideoResultProps> = (props) => {
                 let stream = ytdl(props.result.id.videoId, { quality: 'highestaudio' });
 
                 ffmpeg(stream)
-                    .on('progress', function (progress) {
-
-                        setDownloadingProcess(downloadingProcess + 10)
-                    })
                     .on('end', function () {
-                        setDownloadingProcess(100)
-
-                        setTimeout(() => {
-                            setDownloadingProcess(0)
-                        }, 2000);
+                        Helpers.notify("Downloading complete!", "success");
+                        setIsOverlayOn(true);
                     })
                     .on('error', function (err) {
-                        setDownloadingProcess(100)
-                        setErrorOnDownload(true);
+                        Helpers.notify("Downloading error!", "error");
+                        setIsOverlayOn(true);
                     })
                     .save(`${result.filePaths[0]}\\${props.result.snippet.title.replace(/\s+/g, '_')}.mp3`);
             }
@@ -52,7 +42,7 @@ const VideoResult: React.FC<VideoResultProps> = (props) => {
 
             if (result.filePaths && result.filePaths.length > 0) {
 
-                let stream = ytdl(props.result.id.videoId, { quality: 'highestvideo' });
+                let stream = ytdl(props.result.id.videoId);
 
                 ffmpeg(stream).save(`${result.filePaths[0]}\\${props.result.snippet.title.replace(/\s+/g, '_')}.mp4`);
             }
@@ -68,14 +58,13 @@ const VideoResult: React.FC<VideoResultProps> = (props) => {
     return (
         <>
             <div className="video-result-card">
+                {isOverlayOn && <div className="video-result-overlay"></div>}
                 <div className="video-result-card-img" >
                     <img className="video-result-col-image" alt="no image"
                         src={props.result.snippet.thumbnails.default.url}
                         width={props.result.snippet.thumbnails.default.width}
-                        height={props.result.snippet.thumbnails.default.height} />
-                    <div className="video-result-img-overlay">
-                        <img src={isAudioPlaying ? stop : play} onClick={onResultSelected} />
-                    </div>
+                        height={props.result.snippet.thumbnails.default.height}
+                        onClick={onResultSelected} />
                 </div>
                 <div className="video-result-card-info">
                     <h3 className="video-result-col-title">{props.result.snippet.title}</h3>
@@ -86,9 +75,7 @@ const VideoResult: React.FC<VideoResultProps> = (props) => {
 
                 </div>
             </div>
-            <div className="video-result-progress-bar" style={errorOnDownload
-                ? { backgroundColor: "red", width: `${downloadingProcess}%` }
-                : { width: `${downloadingProcess}%` }}></div>
+
         </>
     )
 }

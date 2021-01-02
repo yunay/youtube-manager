@@ -1,5 +1,5 @@
-// var ffmpegPath = require('ffmpeg-static-electron').path;
 
-// export const config = {
-//     ffmpegPath: ffmpegPath
-// }
+
+export const config = {
+    youtubeKey:'AIzaSyCAc86b5gdtJL31lbLlPzENLRNccB6u12k'
+}

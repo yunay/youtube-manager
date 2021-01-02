@@ -1,5 +1,5 @@
 import React from 'react'
-import icon from '../assets/images/icon.png'
+import icon from '../assets/images/icon.ico'
 import { remote } from 'electron'
 
 interface TopbarProps {
@@ -21,7 +21,7 @@ const Topbar: React.FC<TopbarProps> = (props) => {
 
     return (
         <nav id="topbar">
-            <img src={icon} width={30} height={20} alt="no image" />
+            <img src={icon} width={30} height={30} alt="no image" />
             <div id="topbar-btns">
                 <button className="topbar-btn" onClick={minimize}>➖</button>
                 <button className="topbar-btn" onClick={maximize}>⬜</button>

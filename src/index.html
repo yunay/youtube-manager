@@ -1,10 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Youtube Manager</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Youtube Manager</title>
+  <style>
+    #notification {
+      position: fixed;
+      bottom: 90px;
+      left: 10px;
+      width: 200px;
+      padding: 20px;
+      color: #4e73df;
+      border-radius: 5px;
+      background-color: white;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <p id="version"></p>
+  <div id="notification" class="hidden">
+    <p id="message"></p>
+    <button id="restart-button" class="btn btn-primary hidden" onClick="restartApp()">
+      Рестартирай
+    </button>
+  </div>
+  <script type="text/javascript">
+    window.exports = module.exports
+  </script>
+  <script type="text/tsx">
+  import * as React from 'react';
+  import * as ReactDOM from 'react-dom';
+  import { AppContainer } from 'react-hot-loader';
+  import { HashRouter } from 'react-router-dom';
+
+  const { ipcRenderer } = require('electron');
+  const version = document.getElementById('version');
+
+  let render = () => {
+  const { App } = require('./app');
+
+  ReactDOM.render(
+  <AppContainer><HashRouter basename={'/'}><App /></HashRouter></AppContainer>, document.getElementById('wrapper'));
+  }
+
+  ipcRenderer.send('app_version');
+  ipcRenderer.on('app_version', (event, arg) => {
+  ipcRenderer.removeAllListeners('app_version');
+  version.innerText = 'Версия ' + arg.version;
+  });
+
+  ipcRenderer.on('update_available', () => {
+  ipcRenderer.removeAllListeners('update_available');
+  document.getElementById('message').innerText = 'Има нова версия на програмата. Изтегля се...';
+  document.getElementById('notification').classList.remove('hidden');
+  });
+  ipcRenderer.on('update_downloaded', () => {
+  ipcRenderer.removeAllListeners('update_downloaded');
+  document.getElementById('message').innerText = 'Рестартирай за да обновиш програмата.';
+  document.getElementById('restart-button').classList.remove('hidden');
+  document.getElementById('notification').classList.remove('hidden');
+  });
+
+  function restartApp() {
+  ipcRenderer.send('restart_app');
+  }
+
+  render();
+  if (module.hot) { module.hot.accept(render); }
+
+</script>
+</body>
+
 </html>

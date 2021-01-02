@@ -12,7 +12,7 @@ const AudioPlayerControls: React.FC<AudioPlayerControlsProps> = (props) => {
     const [currentDuration, setCurrentDuraiton] = useState<number>(0)
 
     const formatDuration = (duration: moment.Duration) => {
-        return `${Helpers.addLeadingZero(duration.minutes().toString(), 2)}:${Helpers.addLeadingZero(duration.seconds().toString(), 2)}`
+        return `${Helpers.text.addLeadingZero(duration.minutes().toString(), 2)}:${Helpers.text.addLeadingZero(duration.seconds().toString(), 2)}`
     }
 
     useEffect(() => {

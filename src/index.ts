@@ -1,5 +1,11 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
+import { autoUpdater } from 'electron-updater'
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow: Electron.BrowserWindow | null = null;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -11,6 +17,7 @@ const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 768,
     width: 1366,
+    icon: __dirname + '/src/assets/images/icon.ico',
     webPreferences : { nodeIntegration: true, enableRemoteModule: true },
     resizable: true,
     frame:false
@@ -47,5 +54,18 @@ app.on('activate', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+ipcMain.on('app_version', (event: any) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
+
+autoUpdater.on('update-available', () => {
+  mainWindow.webContents.send('update_available');
+});
+
+autoUpdater.on('update-downloaded', () => {
+  mainWindow.webContents.send('update_downloaded');
+});
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
