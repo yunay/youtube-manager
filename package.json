@@ -1,7 +1,7 @@
 {
   "name": "youtube-manager",
   "productName": "Youtube Downloader",
-  "version": "1.0.0",
+  "version": "1.0.1-alpha",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
@@ -19,31 +19,13 @@
     "email": "yunay.yuksel@gmail.com"
   },
   "license": "MIT",
-  "build": {
-    "appId": "youtube-manager",
-    "win": {
-      "target": [
-        "nsis"
-      ],
-      "icon": "src/assets/images/icon.ico"
-    },
-    "nsis": {
-      "installerIcon": "src/assets/images/icon.ico",
-      "uninstallerIcon": "src/assets/images/icon.ico",
-      "uninstallDisplayName": "Youtube Downloader",
-      "license":"license.txt",
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
-    },
-    "asarUnpack": [
-      "node_modules/ffmpeg-static/bin/${os}/${arch}/ffmpeg",
-      "node_modules/ffmpeg-static/index.js",
-      "node_modules/ffmpeg-static/package.json"
-    ]
-  },
   "config": {
     "forge": {
       "packagerConfig": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",

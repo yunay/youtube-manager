@@ -17,6 +17,8 @@ const createWindow = (): void => {
   const mainWindow = new BrowserWindow({
     height: 768,
     width: 1366,
+    minWidth: 1366,
+    minHeight:768,
     icon: __dirname + '/src/assets/images/icon.ico',
     webPreferences : { nodeIntegration: true, enableRemoteModule: true },
     resizable: true,

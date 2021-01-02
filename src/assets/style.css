@@ -55,6 +55,7 @@ button:focus, button:active, input:focus, input:active {
     background-color: transparent;
     font-size: 15px;
     margin-left: 10px;
+    min-width: 40px;
 }
 
 .topbar-btn:hover {
