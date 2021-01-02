@@ -1,7 +1,7 @@
 {
   "name": "youtube-manager",
   "productName": "Youtube Downloader",
-  "version": "1.0.1-alpha",
+  "version": "1.0.2-alpha",
   "description": "My Electron application description",
   "main": ".webpack/main",
   "scripts": {
